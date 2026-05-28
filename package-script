@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+#
+# package-script — bundles the installer + binaries + configs into a
+# single self-extracting .run file using makeself.
+#
+# Usage: ./package-script [output-filename]
+#
+set -Eeuo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+STAGING_DIR="${SCRIPT_DIR}/staging"
+OUTPUT="${1:-${SCRIPT_DIR}/k8s-installer.run}"
+
+log()  { echo "[$(date '+%H:%M:%S')] [$1] ${*:2}"; }
+info() { log INFO  "$@"; }
+err()  { log ERROR "$@" >&2; }
+
+trap 'err "package-script failed at line $LINENO"; exit 1' ERR
+
+if ! command -v makeself >/dev/null 2>&1; then
+  info "Installing makeself..."
+  apt-get update -qq
+  apt-get install -y makeself
+fi
+
+if [[ ! -f automation-scripts/install-k8s.sh ]]; then
+  err "Missing automation-scripts/install-k8s.sh. Run from project root."
+  exit 1
+fi
+if [[ ! -d binaries ]]; then
+  err "Missing binaries/. Run build-script first."
+  exit 1
+fi
+if [[ ! -d configs ]]; then
+  err "Missing configs/."
+  exit 1
+fi
+
+rm -rf "$STAGING_DIR"   
+mkdir -p "$STAGING_DIR"
+cp -r automation-scripts/ "$STAGING_DIR"/
+cp -r binaries/ "$STAGING_DIR"/
+cp -r configs/ "$STAGING_DIR"/
+mkdir -p "$STAGING_DIR/logs"
+
+
+cat > "$STAGING_DIR/install.sh" <<'EOF'
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+exec ./automation-scripts/install-k8s.sh "$@"
+EOF
+chmod +x "$STAGING_DIR/install.sh"
+
+makeself --notemp "$STAGING_DIR" "$OUTPUT" \
+  "Air-gapped Kubernetes installer" ./install.sh
+
+
+info "Package built: $OUTPUT"
+ls -lh "$OUTPUT"

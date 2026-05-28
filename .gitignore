@@ -1,0 +1,8 @@
+binaries/
+staging/
+logs/
+k8s-installer.run
+*.run
+*.bak
+*.OLD
+configs/join-command.sh
