@@ -104,8 +104,8 @@ jobs:
       # -------------------------------------------------------------------
       - name: Gather binaries
         run: |
-          chmod +x build-script
-          ./build-script
+          chmod +x build-script.sh
+          ./build-script.sh
 
       # -------------------------------------------------------------------
       # 7. (Image gathering is intentionally skipped in CI.)
