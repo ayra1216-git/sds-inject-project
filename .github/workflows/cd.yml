@@ -18,7 +18,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
 
     # gh CLI needs read access to the Release.
     permissions:
