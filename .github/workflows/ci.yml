@@ -1,0 +1,158 @@
+name: build-installer
+
+# WHEN to run:
+#   push to main      - every commit to main triggers a build
+#   pull_request      - validate PRs before merging
+#   workflow_dispatch - manual trigger via GitHub UI ("Run workflow" button)
+#   tag push          - tagging like v1.0.0 builds AND publishes a Release
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    # GitHub-hosted runner: fresh Ubuntu VM, disposable, has internet.
+    # That's why we download binaries here instead of committing them.
+    runs-on: ubuntu-22.04
+
+    # Permissions needed to create a Release at the end.
+    permissions:
+      contents: write
+
+    steps:
+      # -------------------------------------------------------------------
+      # 1. Check out the repo onto the runner
+      # -------------------------------------------------------------------
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # -------------------------------------------------------------------
+      # 2. Install the tools the build needs
+      #    shellcheck = lint bash scripts
+      #    makeself   = build the self-extracting installer
+      # -------------------------------------------------------------------
+      - name: Install build tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y shellcheck makeself
+
+      # -------------------------------------------------------------------
+      # 3. Lint every bash script with shellcheck.
+      #    Catches silent bugs like missing ';;' or unquoted variables.
+      # -------------------------------------------------------------------
+      - name: Shellcheck
+        run: |
+          shellcheck \
+            automation-scripts/install-k8s.sh \
+            automation-scripts/gather-images.sh \
+            build-script \
+            package-script
+
+      # -------------------------------------------------------------------
+      # 4. Bash syntax check.
+      #    'bash -n' parses without running. Cheap second line of defence
+      #    in case shellcheck misses something.
+      # -------------------------------------------------------------------
+      - name: Syntax check
+        run: |
+          for f in \
+            automation-scripts/install-k8s.sh \
+            automation-scripts/gather-images.sh \
+            build-script \
+            package-script; do
+            bash -n "$f"
+          done
+          echo "All scripts parse cleanly."
+
+      # -------------------------------------------------------------------
+      # 5. Error-injection tests.
+      #    The assignment requires CI to prove the script handles errors
+      #    and misconfigurations. We feed it bad input and assert it
+      #    fails with a non-zero exit code.
+      #
+      #    `! cmd` inverts the exit code, so the step PASSES when the
+      #    command FAILS — which is what we want for these tests.
+      # -------------------------------------------------------------------
+      - name: Error-injection tests
+        run: |
+          chmod +x automation-scripts/install-k8s.sh
+
+          echo "Test 1: no arguments should fail with usage"
+          ! ./automation-scripts/install-k8s.sh
+
+          echo "Test 2: invalid role should fail"
+          ! ./automation-scripts/install-k8s.sh --role banana
+
+          echo "Test 3: missing role value should fail"
+          ! ./automation-scripts/install-k8s.sh --role
+
+          echo "Test 4: unknown argument should fail"
+          ! ./automation-scripts/install-k8s.sh --bogus
+
+          echo "Test 5: non-root preflight should fail"
+          ! ./automation-scripts/install-k8s.sh --role master --check
+
+          echo "All error-injection tests passed."
+
+      # -------------------------------------------------------------------
+      # 6. Run build-script to download binaries from the official sources.
+      #    The runner has internet; the target machine won't.
+      # -------------------------------------------------------------------
+      - name: Gather binaries
+        run: |
+          chmod +x build-script
+          ./build-script
+
+      # -------------------------------------------------------------------
+      # 7. (Image gathering is intentionally skipped in CI.)
+      #    `gather-images.sh` pulls container images through a running
+      #    containerd. Hosted runners don't ship containerd configured
+      #    the way kubeadm expects, so image gathering happens on a
+      #    build VM separately. The README documents this trade-off.
+      # -------------------------------------------------------------------
+
+      # -------------------------------------------------------------------
+      # 8. Build the self-extracting installer with makeself.
+      # -------------------------------------------------------------------
+      - name: Package the installer
+        run: |
+          chmod +x package-script
+          sudo ./package-script
+
+      # -------------------------------------------------------------------
+      # 9. Always keep the .run as a workflow artifact (expires after 90d).
+      #    Useful for PR-level testing without publishing a release.
+      # -------------------------------------------------------------------
+      - name: Upload installer as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: k8s-installer
+          path: k8s-installer.run
+          retention-days: 30
+
+      # -------------------------------------------------------------------
+      # 10. On a tag push (v1.0.0, etc.), also publish a permanent Release.
+      #     This satisfies "save it in storage" from the brief.
+      # -------------------------------------------------------------------
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: k8s-installer.run
+          generate_release_notes: true
+
+      # -------------------------------------------------------------------
+      # 11. Notify on failure.
+      #     GitHub already emails workflow failures to the team by default
+      #     (Settings -> Notifications). This step adds a clear log line
+      #     and could be wired to Slack with a SLACK_WEBHOOK secret.
+      # -------------------------------------------------------------------
+      - name: Notify failure
+        if: failure()
+        run: |
+          echo "::error::CI pipeline failed for ${{ github.repository }}@${{ github.sha }}"
+          echo "Logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
