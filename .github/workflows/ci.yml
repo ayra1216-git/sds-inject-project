@@ -46,7 +46,7 @@ jobs:
       # -------------------------------------------------------------------
       - name: Shellcheck
         run: |
-          shellcheck \
+          shellcheck -S error \
             automation-scripts/install-k8s.sh \
             automation-scripts/gather-images.sh \
             build-script.sh \
