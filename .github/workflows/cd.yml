@@ -20,21 +20,28 @@ jobs:
   deploy:
     runs-on: ubuntu-22.04
 
+    # gh CLI needs read access to the Release.
+    permissions:
+      contents: read
+
     steps:
       # 1. Check out the repo (we need cd/deploy.sh)
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Download the installer artifact built by the CI workflow.
-      #    For workflow_dispatch / release: this pulls the latest .run from
-      #    the most recent successful CI run.
-      - name: Download latest installer
-        uses: dawidd6/action-download-artifact@v6
-        with:
-          workflow: ci.yml
-          name: k8s-installer
-          path: .
-          if_no_artifact_found: fail
+      # 2. Download the installer from the most recent GitHub Release.
+      #    Releases are published by CI when a tag like v1.0.0 is pushed,
+      #    so they are the canonical "storage" for the .run file.
+      - name: Download installer from latest Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Find the most recent release tag and download its k8s-installer.run
+          gh release download \
+            --repo "${{ github.repository }}" \
+            --pattern 'k8s-installer.run' \
+            --dir .
+          ls -lh k8s-installer.run
 
       # 3. Set up the SSH key so deploy.sh can connect to the target.
       #    The private key is stored as a repo secret (Settings -> Secrets).
@@ -44,7 +51,10 @@ jobs:
           echo "${{ secrets.TARGET_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           # Pre-add target host fingerprint so SSH doesn't prompt.
-          ssh-keyscan -H "${{ inputs.target_host }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+          TARGET="${{ inputs.target_host }}"
+          if [[ -n "$TARGET" ]]; then
+            ssh-keyscan -H "$TARGET" >> ~/.ssh/known_hosts 2>/dev/null || true
+          fi
 
       # 4. Run the deployment
       - name: Deploy to target
