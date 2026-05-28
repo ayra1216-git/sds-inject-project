@@ -62,7 +62,7 @@ jobs:
           for f in \
             automation-scripts/install-k8s.sh \
             automation-scripts/gather-images.sh \
-            build-script \
+            build-script.sh \
             package-script; do
             bash -n "$f"
           done
