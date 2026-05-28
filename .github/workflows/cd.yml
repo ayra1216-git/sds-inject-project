@@ -48,7 +48,9 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.TARGET_SSH_KEY }}" > ~/.ssh/id_rsa
+          cat > ~/.ssh/id_rsa <<'EOF'
+          ${{ secrets.TARGET_SSH_KEY }}
+          EOF
           chmod 600 ~/.ssh/id_rsa
           # Pre-add target host fingerprint so SSH doesn't prompt.
           TARGET="${{ inputs.target_host }}"
