@@ -12,27 +12,23 @@
 #
 # ---------------------------------------------------------------------------
 
-# set -E : ERR trap is inherited by functions and subshells
-# set -e : exit immediately if any command fails
-# set -u : treat use of an unset variable as an error
-# set -o pipefail : a pipeline fails if ANY command in it fails, not just the last
 set -Eeuo pipefail
 
 # --- Version pinning -------------------------------------------------------
-# One source of truth. Air-gapped installs MUST be reproducible, so we never
+# One source of truth. Air-gapped installs must be reproducible, so we never
 # use "latest" — the build machine and the target could otherwise drift.
-K8S_VERSION="v1.35.5"          # baseline version a fresh master gets
-CONTAINERD_VERSION="2.0.2"     # container runtime
-RUNC_VERSION="v1.2.4"          # low-level OCI runtime that containerd calls
-CNI_PLUGINS_VERSION="v1.6.2"   # standard CNI network plugins
-HELM_VERSION="v3.17.0"         # extra tool requested by the assignment
-KUSTOMIZE_VERSION="v5.6.0"     # extra tool requested by the assignment
+K8S_VERSION="v1.35.5"          
+CONTAINERD_VERSION="2.0.2"     
+RUNC_VERSION="v1.2.4"          
+CNI_PLUGINS_VERSION="v1.6.2"   
+HELM_VERSION="v3.17.0"         
+KUSTOMIZE_VERSION="v5.6.0"     
 
-ARCH="amd64"                   # target CPU architecture
+ARCH="amd64"  
 
 # --- Paths -----------------------------------------------------------------
 # Resolve the directory this script lives in, so it works no matter where
-# it is called from. This is a standard bash idiom worth memorising.
+# it is called from. 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BIN_DIR="${SCRIPT_DIR}/binaries"
 
@@ -46,11 +42,7 @@ err()  { log ERROR "$@" >&2; }
 trap 'err "build-script failed at line $LINENO"; exit 1' ERR
 
 # --- Helper: download a file with SMART retries ----------------------------
-# Networks are flaky, so we retry — but ONLY for transient failures.
-# A 403/404 is permanent: the request itself is wrong, so retrying it just
-# wastes time. We retry connection problems and 5xx server errors; we fail
-# fast on 4xx client errors. Knowing which failures are worth healing is
-# the heart of good self-healing logic.
+
 fetch() {
   local url="$1" dest="$2" attempt=1 max=3 code
 
