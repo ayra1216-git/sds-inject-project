@@ -1,4 +1,3 @@
-binaries/
 staging/
 k8s-installer.run
 *.run
