@@ -48,6 +48,7 @@ cp -r "$SCRIPT_DIR/configs/" "$STAGING_DIR/"
 mkdir -p "$STAGING_DIR/logs"
 
 
+
 cat > "$STAGING_DIR/install.sh" <<'EOF'
 #!/usr/bin/env bash
 cd "$(dirname "$0")"
