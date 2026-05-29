@@ -1,6 +1,5 @@
 binaries/
 staging/
-logs/
 k8s-installer.run
 *.run
 *.bak
