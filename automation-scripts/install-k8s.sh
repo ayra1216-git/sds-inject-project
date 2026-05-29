@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# install-k8s.sh — installs Kubernetes (master or worker) from bundled binaries.
+# Designed for air-gapped Ubuntu 22.04+ targets — no internet required at runtime.
+#
+# Usage:
+#   sudo ./install-k8s.sh --role master [--check]
+#   sudo ./install-k8s.sh --role worker --join-command "kubeadm join ..."
+#
+# Logs to ../logs/install-<timestamp>.log alongside stdout.
 set -Eeuo pipefail
 err_report() {
     err "Error on line $1, Check $LOG_FILE for details."
