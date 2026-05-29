@@ -28,19 +28,31 @@ jobs:
       # 1. Check out the repo (we need cd/deploy.sh)
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name: Install gh CLI
+        run: |
+          if ! command -v gh >/dev/null 2>&1; then
+            sudo mkdir -p -m 755 /etc/apt/keyrings
+            wget -nv -O- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
+            sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            sudo apt-get update -qq
+            sudo apt-get install -y gh
+          fi
 
       # 2. Download the installer from the most recent GitHub Release.
       #    Releases are published by CI when a tag like v1.0.0 is pushed,
       #    so they are the canonical "storage" for the .run file.
       - name: Download installer from latest Release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Find the most recent release tag and download its k8s-installer.run
-          gh release download \
-            --repo "${{ github.repository }}" \
-            --pattern 'k8s-installer.run' \
-            --dir .
+          # Find the latest release tag, then download its k8s-installer.run asset
+          URL=$(curl -sL "https://api.github.com/repos/${{ github.repository }}/releases/latest" \
+                | grep '"browser_download_url"' \
+                | grep 'k8s-installer.run' \
+                | cut -d'"' -f4)
+          if [[ -z "$URL" ]]; then
+            echo "No k8s-installer.run found in latest release"; exit 1
+          fi
+          curl -L -o k8s-installer.run "$URL"
           ls -lh k8s-installer.run
 
       # 3. Set up the SSH key so deploy.sh can connect to the target.
