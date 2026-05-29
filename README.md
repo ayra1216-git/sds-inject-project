@@ -84,7 +84,7 @@ sudo ./automation-scripts/gather-images.sh  # pulls images via containerd
 ./package-script                            # produces k8s-installer.run
 ```
 
-The result is `k8s-installer.run`, ~164 MB. It runs anywhere on Ubuntu 22.04+ x86_64.
+The result is `k8s-installer.run`, ~300 MB. It runs anywhere on Ubuntu 22.04+ x86_64.
 
 ### Run the installer on an air-gapped target
 
