@@ -1,0 +1,2 @@
+./install-k8sv2.sh: line 74: install_worker: command not found
+[2026-05-28T14:10:34] [ERROR] Error on line 74, Check /home/vboxuser/sds-inject-project/automation-scripts/../logs/install-20260528-141034.log for details.

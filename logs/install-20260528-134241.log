@@ -1,0 +1,7 @@
+[2026-05-28T13:42:41] [INFO] Running preflight checks
+[2026-05-28T13:42:41] [INFO] Preflight checks passed.
+[2026-05-28T13:42:41] [INFO] Disabling swap
+[2026-05-28T13:42:41] [INFO] Swap is off.
+[2026-05-28T13:42:41] [INFO] Loading kernel modules...
+[2026-05-28T13:42:42] [WARN] Module overlay not loaded — retrying.
+[2026-05-28T13:42:42] [ERROR] Module overlay failed to load. Suggestion: check kernel support with 'modinfo overlay'.

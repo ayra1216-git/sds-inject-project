@@ -1,0 +1,26 @@
+[2026-05-28T13:42:47] [INFO] Running preflight checks
+[2026-05-28T13:42:47] [INFO] Preflight checks passed.
+[2026-05-28T13:42:47] [INFO] Disabling swap
+[2026-05-28T13:42:47] [INFO] Swap is off.
+[2026-05-28T13:42:47] [INFO] Loading kernel modules...
+[2026-05-28T13:42:48] [WARN] Module br_netfilter not loaded — retrying.
+[2026-05-28T13:42:48] [INFO] Kernel modules loaded.
+[2026-05-28T13:42:48] [INFO] Applying sysctl settings...
+[2026-05-28T13:42:48] [INFO] Sysctl settings applied.
+[2026-05-28T13:42:48] [INFO] containerd already running, skipping
+[2026-05-28T13:42:48] [INFO] Installing kubeadm, kubelet, kubectl...
+[2026-05-28T13:42:49] [INFO] Kubernetes binaries installed.
+[2026-05-28T13:42:49] [INFO] Installing helm and kustomize...
+[2026-05-28T13:42:49] [INFO] helm and kustomize installed.
+[2026-05-28T13:42:49] [INFO] Importing bundled container images...
+[2026-05-28T13:42:49] [INFO] Importing ghcr.io_flannel-io_flannel-cni-plugin_v1.7.1-flannel1.tar
+[2026-05-28T13:42:49] [INFO] Importing ghcr.io_flannel-io_flannel_v0.27.0.tar
+[2026-05-28T13:42:50] [INFO] Importing registry.k8s.io_coredns_coredns_v1.13.1.tar
+[2026-05-28T13:42:50] [INFO] Importing registry.k8s.io_etcd_3.6.6-0.tar
+[2026-05-28T13:42:50] [INFO] Importing registry.k8s.io_kube-apiserver_v1.35.5.tar
+[2026-05-28T13:42:51] [INFO] Importing registry.k8s.io_kube-controller-manager_v1.35.5.tar
+[2026-05-28T13:42:51] [INFO] Importing registry.k8s.io_kube-proxy_v1.35.5.tar
+[2026-05-28T13:42:51] [INFO] Importing registry.k8s.io_kube-scheduler_v1.35.5.tar
+[2026-05-28T13:42:51] [INFO] Importing registry.k8s.io_pause_3.10.1.tar
+[2026-05-28T13:42:52] [INFO] Imported 9 image(s).
+[2026-05-28T13:42:52] [INFO] Done. Log: /home/vboxuser/sds-inject-project/automation-scripts/../logs/install-20260528-134247.log

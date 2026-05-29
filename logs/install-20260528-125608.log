@@ -1,0 +1,12 @@
+[2026-05-28T12:56:08] [INFO] Running preflight checks
+[2026-05-28T12:56:08] [INFO] Preflight checks passed.
+[2026-05-28T12:56:08] [INFO] Disabling swap
+[2026-05-28T12:56:08] [INFO] Swap is off.
+[2026-05-28T12:56:08] [INFO] Loading kernel modules...
+[2026-05-28T12:56:09] [INFO] Kernel modules loaded.
+[2026-05-28T12:56:09] [INFO] Applying sysctl settings...
+[2026-05-28T12:56:09] [INFO] Sysctl settings applied.
+[2026-05-28T12:56:09] [INFO] containerd already running, skipping
+[2026-05-28T12:56:09] [INFO] Installing kubeadm, kubelet, kubectl...
+[2026-05-28T12:56:10] [INFO] Kubernetes binaries installed.
+[2026-05-28T12:56:10] [INFO] Section 1 complete.

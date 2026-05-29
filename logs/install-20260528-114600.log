@@ -1,0 +1,76 @@
++ ROLE=
++ CHECK_ONLY=0
++ [[ 2 -gt 0 ]]
++ case "$1" in
++ [[ -z master ]]
++ ROLE=master
++ shift 2
++ [[ 0 -gt 0 ]]
++ case "$ROLE" in
++ :
++ main
++ preflight
++ info 'Running preflight checks'
++ log INFO 'Running preflight checks'
+++ date +%Y-%m-%dT%H:%M:%S
++ echo '[2026-05-28T11:46:00] [INFO] Running preflight checks'
+[2026-05-28T11:46:00] [INFO] Running preflight checks
++ local ok=1
++ [[ 0 -ne 0 ]]
++ grep -qi ubuntu /etc/os-release
++ [[ ! -f /sys/fs/cgroup/cgroup.controllers ]]
++ [[ master == \m\a\s\t\e\r ]]
+++ nproc
++ cpus=6
++ [[ 6 -lt 2 ]]
++ [[ 1 -eq 0 ]]
++ info 'Preflight checks passed.'
++ log INFO 'Preflight checks passed.'
+++ date +%Y-%m-%dT%H:%M:%S
++ echo '[2026-05-28T11:46:00] [INFO] Preflight checks passed.'
+[2026-05-28T11:46:00] [INFO] Preflight checks passed.
++ [[ 0 -eq 1 ]]
++ prep_swap
++ info 'Disabling swap'
++ log INFO 'Disabling swap'
+++ date +%Y-%m-%dT%H:%M:%S
++ echo '[2026-05-28T11:46:00] [INFO] Disabling swap'
+[2026-05-28T11:46:00] [INFO] Disabling swap
++ swapoff -a
++ sed -i.bak '/\sswap\s/s/^/#/' /etc/fstab
+++ free
+++ grep Swap
+++ awk '{print $2}'
++ SWAP_TOTAL=0
++ [[ 0 -ne 0 ]]
++ info 'Swap is off.'
++ log INFO 'Swap is off.'
+++ date +%Y-%m-%dT%H:%M:%S
++ echo '[2026-05-28T11:46:00] [INFO] Swap is off.'
+[2026-05-28T11:46:00] [INFO] Swap is off.
++ prep_modules
++ info 'Loading kernel modules...'
++ log INFO 'Loading kernel modules...'
+++ date +%Y-%m-%dT%H:%M:%S
++ echo '[2026-05-28T11:46:00] [INFO] Loading kernel modules...'
+[2026-05-28T11:46:00] [INFO] Loading kernel modules...
++ cat
++ modprobe overlay
++ modprobe br_netfilter
++ sleep 5
++ for m in overlay br_netfilter
++ lsmod
++ grep -q '^overlay'
++ for m in overlay br_netfilter
++ lsmod
++ grep -q '^br_netfilter'
++ info 'Kernel modules loaded.'
++ log INFO 'Kernel modules loaded.'
+++ date +%Y-%m-%dT%H:%M:%S
++ echo '[2026-05-28T11:46:05] [INFO] Kernel modules loaded.'
+[2026-05-28T11:46:05] [INFO] Kernel modules loaded.
++ info 'Section 1 complete.'
++ log INFO 'Section 1 complete.'
+++ date +%Y-%m-%dT%H:%M:%S
++ echo '[2026-05-28T11:46:05] [INFO] Section 1 complete.'
+[2026-05-28T11:46:05] [INFO] Section 1 complete.

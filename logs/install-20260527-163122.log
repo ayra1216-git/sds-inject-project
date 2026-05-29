@@ -1,0 +1,67 @@
+[2026-05-27T16:31:22] [INFO] Starting install-k8s.sh — role=master check_only=0
+[2026-05-27T16:31:22] [INFO] === Preflight checks ===
+[2026-05-27T16:31:22] [INFO] Preflight checks passed.
+[2026-05-27T16:31:22] [INFO] Disabling swap...
+[2026-05-27T16:31:22] [INFO] Swap is off.
+[2026-05-27T16:31:22] [INFO] Loading kernel modules (overlay, br_netfilter)...
+[2026-05-27T16:31:22] [INFO] Kernel modules loaded.
+[2026-05-27T16:31:22] [INFO] Applying sysctl settings...
+[2026-05-27T16:31:22] [INFO] Sysctl settings applied.
+[2026-05-27T16:31:22] [INFO] containerd already running — skipping install.
+[2026-05-27T16:31:22] [INFO] Installing kubeadm, kubelet, kubectl...
+[2026-05-27T16:31:23] [INFO] Kubernetes binaries installed.
+[2026-05-27T16:31:23] [INFO] Installing helm and kustomize...
+[2026-05-27T16:31:23] [INFO] helm and kustomize installed.
+[2026-05-27T16:31:23] [INFO] Importing bundled container images...
+[2026-05-27T16:31:23] [INFO] Importing ghcr.io_flannel-io_flannel-cni-plugin_v1.7.1-flannel1.tar
+[2026-05-27T16:31:24] [INFO] Importing ghcr.io_flannel-io_flannel_v0.27.0.tar
+[2026-05-27T16:31:24] [INFO] Importing registry.k8s.io_coredns_coredns_v1.13.1.tar
+[2026-05-27T16:31:24] [INFO] Importing registry.k8s.io_etcd_3.6.6-0.tar
+[2026-05-27T16:31:25] [INFO] Importing registry.k8s.io_kube-apiserver_v1.35.5.tar
+[2026-05-27T16:31:25] [INFO] Importing registry.k8s.io_kube-controller-manager_v1.35.5.tar
+[2026-05-27T16:31:25] [INFO] Importing registry.k8s.io_kube-proxy_v1.35.5.tar
+[2026-05-27T16:31:26] [INFO] Importing registry.k8s.io_kube-scheduler_v1.35.5.tar
+[2026-05-27T16:31:26] [INFO] Importing registry.k8s.io_pause_3.10.1.tar
+[2026-05-27T16:31:26] [INFO] Imported 9 image(s).
+[2026-05-27T16:31:26] [INFO] === Installing master (control plane) ===
+[2026-05-27T16:31:26] [INFO] Running kubeadm init...
+[init] Using Kubernetes version: v1.35.5
+[preflight] Running pre-flight checks
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [k8subuntu kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.56.101]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [k8subuntu localhost] and IPs [192.168.56.101 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [k8subuntu localhost] and IPs [192.168.56.101 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "super-admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/instance-config.yaml"
+[patches] Applied patch of type "application/strategic-merge-patch+json" to target "kubeletconfiguration"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+error: error execution phase wait-control-plane: cannot obtain client without bootstrap: could not bootstrap the admin user in file admin.conf: unable to create ClusterRoleBinding: client rate limiter Wait returned an error: rate: Wait(n=1) would exceed context deadline
+To see the stack trace of this error execute with --v=5 or higher
+[2026-05-27T16:32:27] [ERROR] kubeadm init failed. Suggestion: check 'journalctl -u kubelet' and the log.
+[2026-05-27T16:32:27] [ERROR] To retry cleanly, run 'kubeadm reset' first.

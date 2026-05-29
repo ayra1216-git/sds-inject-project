@@ -1,0 +1,10 @@
+[2026-05-28T12:39:03] [INFO] Running preflight checks
+[2026-05-28T12:39:03] [INFO] Preflight checks passed.
+[2026-05-28T12:39:03] [INFO] Disabling swap
+[2026-05-28T12:39:03] [INFO] Swap is off.
+[2026-05-28T12:39:03] [INFO] Loading kernel modules...
+[2026-05-28T12:39:04] [INFO] Kernel modules loaded.
+[2026-05-28T12:39:04] [INFO] Applying sysctl settings...
+[2026-05-28T12:39:04] [INFO] Sysctl settings applied.
+[2026-05-28T12:39:04] [INFO] containerd already running, skipping
+[2026-05-28T12:39:04] [INFO] Section 1 complete.

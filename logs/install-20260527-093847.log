@@ -1,0 +1,4 @@
+[2026-05-27T09:38:47] [INFO] Starting install-k8s.sh — role=master check_only=0
+[2026-05-27T09:38:47] [INFO] === Preflight checks ===
+[2026-05-27T09:38:47] [ERROR] Not running as root. Suggestion: re-run with sudo.
+[2026-05-27T09:38:47] [ERROR] Preflight failed. Fix the issues above and re-run.

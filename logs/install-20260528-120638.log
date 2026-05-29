@@ -1,0 +1,10 @@
+[2026-05-28T12:06:38] [INFO] Running preflight checks
+[2026-05-28T12:06:38] [INFO] Preflight checks passed.
+[2026-05-28T12:06:38] [INFO] Disabling swap
+[2026-05-28T12:06:38] [INFO] Swap is off.
+[2026-05-28T12:06:38] [INFO] Loading kernel modules...
+[2026-05-28T12:06:39] [WARN] Module overlay not loaded — retrying.
+[2026-05-28T12:06:39] [INFO] Kernel modules loaded.
+[2026-05-28T12:06:39] [INFO] Applying sysctl settings...
+[2026-05-28T12:06:39] [INFO] Sysctl settings applied.
+[2026-05-28T12:06:39] [INFO] Section 1 complete.

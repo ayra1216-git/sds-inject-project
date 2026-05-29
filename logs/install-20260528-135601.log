@@ -1,0 +1,7 @@
+[2026-05-28T13:56:01] [INFO] Running preflight checks
+[2026-05-28T13:56:01] [INFO] Preflight checks passed.
+[2026-05-28T13:56:01] [INFO] Disabling swap
+[2026-05-28T13:56:01] [INFO] Swap is off.
+[2026-05-28T13:56:01] [INFO] Loading kernel modules...
+[2026-05-28T13:56:02] [WARN] Module br_netfilter not loaded — retrying.
+[2026-05-28T13:56:02] [ERROR] Module br_netfilter failed to load. Suggestion: check kernel support with 'modinfo br_netfilter'.

@@ -1,0 +1,7 @@
+[2026-05-28T11:46:40] [INFO] Running preflight checks
+[2026-05-28T11:46:40] [INFO] Preflight checks passed.
+[2026-05-28T11:46:40] [INFO] Disabling swap
+[2026-05-28T11:46:40] [INFO] Swap is off.
+[2026-05-28T11:46:40] [INFO] Loading kernel modules...
+[2026-05-28T11:46:45] [INFO] Kernel modules loaded.
+[2026-05-28T11:46:45] [INFO] Section 1 complete.

@@ -1,0 +1,122 @@
+[2026-05-28T13:56:05] [INFO] Running preflight checks
+[2026-05-28T13:56:05] [INFO] Preflight checks passed.
+[2026-05-28T13:56:05] [INFO] Disabling swap
+[2026-05-28T13:56:05] [INFO] Swap is off.
+[2026-05-28T13:56:05] [INFO] Loading kernel modules...
+[2026-05-28T13:56:06] [WARN] Module overlay not loaded — retrying.
+[2026-05-28T13:56:06] [INFO] Kernel modules loaded.
+[2026-05-28T13:56:06] [INFO] Applying sysctl settings...
+[2026-05-28T13:56:06] [INFO] Sysctl settings applied.
+[2026-05-28T13:56:06] [INFO] containerd already running, skipping
+[2026-05-28T13:56:06] [INFO] Installing kubeadm, kubelet, kubectl...
+[2026-05-28T13:56:07] [INFO] Kubernetes binaries installed.
+[2026-05-28T13:56:07] [INFO] Installing helm and kustomize...
+[2026-05-28T13:56:07] [INFO] helm and kustomize installed.
+[2026-05-28T13:56:07] [INFO] Importing bundled container images...
+[2026-05-28T13:56:07] [INFO] Importing ghcr.io_flannel-io_flannel-cni-plugin_v1.7.1-flannel1.tar
+[2026-05-28T13:56:07] [INFO] Importing ghcr.io_flannel-io_flannel_v0.27.0.tar
+[2026-05-28T13:56:08] [INFO] Importing registry.k8s.io_coredns_coredns_v1.13.1.tar
+[2026-05-28T13:56:08] [INFO] Importing registry.k8s.io_etcd_3.6.6-0.tar
+[2026-05-28T13:56:08] [INFO] Importing registry.k8s.io_kube-apiserver_v1.35.5.tar
+[2026-05-28T13:56:09] [INFO] Importing registry.k8s.io_kube-controller-manager_v1.35.5.tar
+[2026-05-28T13:56:09] [INFO] Importing registry.k8s.io_kube-proxy_v1.35.5.tar
+[2026-05-28T13:56:09] [INFO] Importing registry.k8s.io_kube-scheduler_v1.35.5.tar
+[2026-05-28T13:56:09] [INFO] Importing registry.k8s.io_pause_3.10.1.tar
+[2026-05-28T13:56:09] [INFO] Imported 9 image(s).
+[2026-05-28T13:56:09] [INFO] === Installing master (control plane) ===
+[init] Using Kubernetes version: v1.35.5
+[preflight] Running pre-flight checks
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [k8subuntu kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.100.102.182]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [k8subuntu localhost] and IPs [10.100.102.182 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [k8subuntu localhost] and IPs [10.100.102.182 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "super-admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/instance-config.yaml"
+[patches] Applied patch of type "application/strategic-merge-patch+json" to target "kubeletconfiguration"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests"
+[kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s
+[kubelet-check] The kubelet is healthy after 631.231µs
+[control-plane-check] Waiting for healthy control plane components. This can take up to 4m0s
+[control-plane-check] Checking kube-apiserver at https://10.100.102.182:6443/livez
+[control-plane-check] Checking kube-controller-manager at https://127.0.0.1:10257/healthz
+[control-plane-check] Checking kube-scheduler at https://127.0.0.1:10259/livez
+[control-plane-check] kube-controller-manager is healthy after 3.146824ms
+[control-plane-check] kube-scheduler is healthy after 5.499174ms
+[control-plane-check] kube-apiserver is healthy after 1.503084034s
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Storing the certificates in Secret "kubeadm-certs" in the "kube-system" Namespace
+[upload-certs] Using certificate key:
+8db857e76cf017d3cc0d0a7e541cd156ab35353a32ff0a9d450edab2f41b375c
+[mark-control-plane] Marking the node k8subuntu as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node k8subuntu as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+[bootstrap-token] Using token: 3hcqor.ijkdu5rnhx01jhyt
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Configured RBAC rules to allow the API server kubelet client certificate to access the kubelet API
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 10.100.102.182:6443 --token 3hcqor.ijkdu5rnhx01jhyt \
+	--discovery-token-ca-cert-hash sha256:4d12fe45a7cf5327170f8a3d81ae5fd4bc1c3916d95d6f49f18145a1074855f4 
+namespace/kube-flannel created
+serviceaccount/flannel created
+clusterrole.rbac.authorization.k8s.io/flannel created
+clusterrolebinding.rbac.authorization.k8s.io/flannel created
+configmap/kube-flannel-cfg created
+daemonset.apps/kube-flannel-ds created
+[2026-05-28T13:56:17] [INFO] Join command saved to configs/join-command.sh
+[2026-05-28T13:56:17] [INFO] Waiting for node Ready (up to 90s)...
+[2026-05-28T13:56:17] [INFO] Node is Ready.
+[2026-05-28T13:56:17] [INFO] Master installation complete.
+[2026-05-28T13:56:17] [INFO] Done. Log: /home/vboxuser/sds-inject-project/automation-scripts/../logs/install-20260528-135605.log

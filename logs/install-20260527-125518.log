@@ -1,0 +1,19 @@
+[2026-05-27T12:55:18] [INFO] Starting install-k8s.sh — role=master check_only=0
+[2026-05-27T12:55:18] [INFO] === Preflight checks ===
+[2026-05-27T12:55:18] [INFO] Preflight checks passed.
+[2026-05-27T12:55:18] [INFO] Disabling swap...
+[2026-05-27T12:55:18] [INFO] Swap is off.
+[2026-05-27T12:55:18] [INFO] Loading kernel modules (overlay, br_netfilter)...
+[2026-05-27T12:55:18] [INFO] Kernel modules loaded.
+[2026-05-27T12:55:18] [INFO] Applying sysctl settings...
+[2026-05-27T12:55:18] [INFO] Sysctl settings applied.
+[2026-05-27T12:55:18] [INFO] Installing containerd, runc, CNI plugins...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /etc/systemd/system/containerd.service.
+[2026-05-27T12:55:22] [INFO] containerd is running.
+[2026-05-27T12:55:22] [INFO] Installing kubeadm, kubelet, kubectl...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /etc/systemd/system/kubelet.service.
+[2026-05-27T12:55:23] [INFO] Kubernetes binaries installed.
+[2026-05-27T12:55:23] [INFO] Installing helm and kustomize...
+[2026-05-27T12:55:24] [INFO] helm and kustomize installed.
+[2026-05-27T12:55:24] [INFO] Section 2 complete: runtime, binaries and tools installed.
+[2026-05-27T12:55:24] [INFO] (kubeadm init / join comes in the next section.)

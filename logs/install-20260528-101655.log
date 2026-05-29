@@ -1,0 +1,2 @@
+Invalid role: babasda
+Usage: ./install-k8sv2.sh --role master|worker|both [--check]

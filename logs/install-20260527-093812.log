@@ -1,0 +1,5 @@
+[2026-05-27T09:38:12] [ERROR] Missing --role
+Usage: sudo ./install-k8s.sh --role master|worker|both [--check]
+
+  --role    which node type to install
+  --check   run preflight checks only, change nothing

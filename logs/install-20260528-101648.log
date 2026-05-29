@@ -1,0 +1,2 @@
+--role requires a value
+Usage: ./install-k8sv2.sh --role master|worker|both [--check]

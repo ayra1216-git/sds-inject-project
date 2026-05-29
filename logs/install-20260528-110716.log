@@ -1,0 +1,3 @@
+[2026-05-28T11:07:16] [INFO] Running preflight checks
+[2026-05-28T11:07:16] [ERROR] This script must be run as root
+[2026-05-28T11:07:16] [ERROR] Preflight failed. Fix issues above and re-run.

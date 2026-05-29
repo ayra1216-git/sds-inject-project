@@ -1,0 +1,15 @@
+[2026-05-28T13:04:21] [INFO] Running preflight checks
+[2026-05-28T13:04:21] [INFO] Preflight checks passed.
+[2026-05-28T13:04:21] [INFO] Disabling swap
+[2026-05-28T13:04:21] [INFO] Swap is off.
+[2026-05-28T13:04:21] [INFO] Loading kernel modules...
+[2026-05-28T13:04:22] [WARN] Module br_netfilter not loaded — retrying.
+[2026-05-28T13:04:22] [INFO] Kernel modules loaded.
+[2026-05-28T13:04:22] [INFO] Applying sysctl settings...
+[2026-05-28T13:04:22] [INFO] Sysctl settings applied.
+[2026-05-28T13:04:22] [INFO] containerd already running, skipping
+[2026-05-28T13:04:22] [INFO] Installing kubeadm, kubelet, kubectl...
+[2026-05-28T13:04:22] [INFO] Kubernetes binaries installed.
+[2026-05-28T13:04:22] [INFO] Installing helm and kustomize...
+[2026-05-28T13:04:23] [INFO] helm and kustomize installed.
+[2026-05-28T13:04:23] [INFO] Section 1 complete.

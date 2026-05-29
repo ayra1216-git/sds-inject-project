@@ -1,0 +1,11 @@
+[2026-05-27T09:39:22] [INFO] Starting install-k8s.sh — role=master check_only=0
+[2026-05-27T09:39:22] [INFO] === Preflight checks ===
+[2026-05-27T09:39:22] [INFO] Preflight checks passed.
+[2026-05-27T09:39:22] [INFO] Disabling swap...
+[2026-05-27T09:39:22] [INFO] Swap is off.
+[2026-05-27T09:39:22] [INFO] Loading kernel modules (overlay, br_netfilter)...
+[2026-05-27T09:39:22] [INFO] Kernel modules loaded.
+[2026-05-27T09:39:22] [INFO] Applying sysctl settings...
+[2026-05-27T09:39:22] [INFO] Sysctl settings applied.
+[2026-05-27T09:39:22] [INFO] Section 1 complete: host is prepared.
+[2026-05-27T09:39:22] [INFO] (Container runtime + Kubernetes install come in the next section.)

@@ -1,0 +1,32 @@
+[2026-05-27T16:41:46] [INFO] Starting install-k8s.sh — role=master check_only=0
+[2026-05-27T16:41:46] [INFO] === Preflight checks ===
+[2026-05-27T16:41:46] [INFO] Preflight checks passed.
+[2026-05-27T16:41:46] [INFO] Disabling swap...
+[2026-05-27T16:41:46] [INFO] Swap is off.
+[2026-05-27T16:41:46] [INFO] Loading kernel modules (overlay, br_netfilter)...
+[2026-05-27T16:41:46] [INFO] Kernel modules loaded.
+[2026-05-27T16:41:46] [INFO] Applying sysctl settings...
+[2026-05-27T16:41:46] [INFO] Sysctl settings applied.
+[2026-05-27T16:41:46] [INFO] containerd already running — skipping install.
+[2026-05-27T16:41:46] [INFO] Installing kubeadm, kubelet, kubectl...
+[2026-05-27T16:41:47] [INFO] Kubernetes binaries installed.
+[2026-05-27T16:41:47] [INFO] Installing helm and kustomize...
+[2026-05-27T16:41:48] [INFO] helm and kustomize installed.
+[2026-05-27T16:41:48] [INFO] Importing bundled container images...
+[2026-05-27T16:41:48] [INFO] Importing ghcr.io_flannel-io_flannel-cni-plugin_v1.7.1-flannel1.tar
+[2026-05-27T16:41:48] [INFO] Importing ghcr.io_flannel-io_flannel_v0.27.0.tar
+[2026-05-27T16:41:49] [INFO] Importing registry.k8s.io_coredns_coredns_v1.13.1.tar
+[2026-05-27T16:41:49] [INFO] Importing registry.k8s.io_etcd_3.6.6-0.tar
+[2026-05-27T16:41:50] [INFO] Importing registry.k8s.io_kube-apiserver_v1.35.5.tar
+[2026-05-27T16:41:50] [INFO] Importing registry.k8s.io_kube-controller-manager_v1.35.5.tar
+[2026-05-27T16:41:51] [INFO] Importing registry.k8s.io_kube-proxy_v1.35.5.tar
+[2026-05-27T16:41:51] [INFO] Importing registry.k8s.io_kube-scheduler_v1.35.5.tar
+[2026-05-27T16:41:51] [INFO] Importing registry.k8s.io_pause_3.10.1.tar
+[2026-05-27T16:41:51] [INFO] Imported 9 image(s).
+[2026-05-27T16:41:51] [INFO] === Installing master (control plane) ===
+[2026-05-27T16:41:51] [INFO] Running kubeadm init...
+W0527 16:41:51.745661    1401 common.go:198] WARNING: could not obtain a bind address for the API Server: no default routes found in "/proc/net/route" or "/proc/net/ipv6_route"; using: 0.0.0.0
+error: cannot use "0.0.0.0" as the bind address for the API Server
+To see the stack trace of this error execute with --v=5 or higher
+[2026-05-27T16:41:51] [ERROR] kubeadm init failed. Suggestion: check 'journalctl -u kubelet' and the log.
+[2026-05-27T16:41:51] [ERROR] To retry cleanly, run 'kubeadm reset' first.

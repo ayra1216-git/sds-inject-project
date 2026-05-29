@@ -1,0 +1,4 @@
+[2026-05-27T09:39:10] [INFO] Starting install-k8s.sh — role=master check_only=1
+[2026-05-27T09:39:10] [INFO] === Preflight checks ===
+[2026-05-27T09:39:10] [INFO] Preflight checks passed.
+[2026-05-27T09:39:10] [INFO] Check-only mode — preflight passed, nothing changed. Exiting.
