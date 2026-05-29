@@ -159,3 +159,13 @@ jobs:
         run: |
           echo "::error::CI pipeline failed for ${{ github.repository }}@${{ github.sha }}"
           echo "Logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+# -------------------------------------------------------------------
+      # Reset workspace ownership. Some steps run with sudo (gather-images.sh
+      # writes via ctr, package-script may install makeself), creating files
+      # owned by root. On a self-hosted runner, the next workflow's checkout
+      # step runs as the runner user and can't delete root-owned files. This
+      # step always runs to leave the workspace clean.
+      # -------------------------------------------------------------------
+      - name: Reset workspace ownership
+        if: always()
+        run: sudo chown -R vboxuser:vboxuser "${{ github.workspace }}"          
