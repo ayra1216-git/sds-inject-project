@@ -17,7 +17,7 @@ jobs:
   build:
     # GitHub-hosted runner: fresh Ubuntu VM, disposable, has internet.
     # That's why we download binaries here instead of committing them.
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
 
     # Permissions needed to create a Release at the end.
     permissions:
@@ -37,8 +37,8 @@ jobs:
       # -------------------------------------------------------------------
       - name: Install build tools
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y shellcheck makeself
+          if ! command -v shellcheck >/dev/null; then sudo apt-get update -qq && sudo apt-get install -y shellcheck; fi
+          if ! command -v makeself >/dev/null; then sudo apt-get update -qq && sudo apt-get install -y makeself; fi
 
       # -------------------------------------------------------------------
       # 3. Lint every bash script with shellcheck.
@@ -106,7 +106,10 @@ jobs:
         run: |
           chmod +x build-script.sh
           ./build-script.sh
-
+      - name: Gather container images
+        run: |
+          chmod +x automation-scripts/gather-images.sh
+          sudo ./automation-scripts/gather-images.sh
       # -------------------------------------------------------------------
       # 7. (Image gathering is intentionally skipped in CI.)
       #    `gather-images.sh` pulls container images through a running
