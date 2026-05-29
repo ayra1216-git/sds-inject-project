@@ -31,6 +31,10 @@ if [[ ! -d binaries ]]; then
   err "Missing binaries/. Run build-script first."
   exit 1
 fi
+if [[ -z "$(ls -A "$SCRIPT_DIR/binaries/images/" 2>/dev/null)" ]]; then
+  err "binaries/images/ is empty — gather-images.sh must run first."
+  exit 1
+fi
 if [[ ! -d configs ]]; then
   err "Missing configs/."
   exit 1
@@ -38,9 +42,9 @@ fi
 
 rm -rf "$STAGING_DIR"   
 mkdir -p "$STAGING_DIR"
-cp -r automation-scripts/ "$STAGING_DIR"/
-cp -r binaries/ "$STAGING_DIR"/
-cp -r configs/ "$STAGING_DIR"/
+cp -r "$SCRIPT_DIR/automation-scripts/" "$STAGING_DIR/"
+cp -r "$SCRIPT_DIR/binaries/" "$STAGING_DIR/"
+cp -r "$SCRIPT_DIR/configs/" "$STAGING_DIR/"
 mkdir -p "$STAGING_DIR/logs"
 
 
