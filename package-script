@@ -10,7 +10,12 @@ set -Eeuo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STAGING_DIR="${SCRIPT_DIR}/staging"
 OUTPUT="${1:-${SCRIPT_DIR}/k8s-installer.run}"
-
+if [[ $EUID -eq 0 ]]; then
+  echo "WARNING: running package-script as root will create root-owned files."
+  echo "Recommend running as a regular user; the script will sudo only what it needs."
+  echo "Continuing in 3 seconds..."
+  sleep 3
+fi
 log()  { echo "[$(date '+%H:%M:%S')] [$1] ${*:2}"; }
 info() { log INFO  "$@"; }
 err()  { log ERROR "$@" >&2; }
@@ -19,8 +24,13 @@ trap 'err "package-script failed at line $LINENO"; exit 1' ERR
 
 if ! command -v makeself >/dev/null 2>&1; then
   info "Installing makeself..."
-  apt-get update -qq
-  apt-get install -y makeself
+  if [[ $EUID -ne 0 ]]; then
+    sudo apt-get update -qq
+    sudo apt-get install -y makeself
+  else
+    apt-get update -qq
+    apt-get install -y makeself
+  fi
 fi
 
 if [[ ! -f automation-scripts/install-k8s.sh ]]; then
